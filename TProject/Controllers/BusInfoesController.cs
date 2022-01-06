@@ -11,48 +11,48 @@ namespace TProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class BusInfoesController : ControllerBase
     {
         private readonly Test1Context _context;
 
-        public UsersController(Test1Context context)
+        public BusInfoesController(Test1Context context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/BusInfoes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<BusInfo>>> GetBusInfo()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.BusInfo.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/BusInfoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUsers(string id)
+        public async Task<ActionResult<BusInfo>> GetBusInfo(string id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var busInfo = await _context.BusInfo.FindAsync(id);
 
-            if (users == null)
+            if (busInfo == null)
             {
                 return NotFound();
             }
 
-            return users;
+            return busInfo;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/BusInfoes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(string id, Users users)
+        public async Task<IActionResult> PutBusInfo(string id, BusInfo busInfo)
         {
-            if (id != users.Id)
+            if (id != busInfo.Np)
             {
                 return BadRequest();
             }
 
-            _context.Entry(users).State = EntityState.Modified;
+            _context.Entry(busInfo).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace TProject.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsersExists(id))
+                if (!BusInfoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,20 +73,20 @@ namespace TProject.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/BusInfoes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
+        public async Task<ActionResult<BusInfo>> PostBusInfo(BusInfo busInfo)
         {
-            _context.Users.Add(users);
+            _context.BusInfo.Add(busInfo);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (UsersExists(users.Id))
+                if (BusInfoExists(busInfo.Np))
                 {
                     return Conflict();
                 }
@@ -96,28 +96,28 @@ namespace TProject.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUsers", new { id = users.Id }, users);
+            return CreatedAtAction("GetBusInfo", new { id = busInfo.Np }, busInfo);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/BusInfoes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Users>> DeleteUsers(string id)
+        public async Task<ActionResult<BusInfo>> DeleteBusInfo(string id)
         {
-            var users = await _context.Users.FindAsync(id);
-            if (users == null)
+            var busInfo = await _context.BusInfo.FindAsync(id);
+            if (busInfo == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(users);
+            _context.BusInfo.Remove(busInfo);
             await _context.SaveChangesAsync();
 
-            return users;
+            return busInfo;
         }
 
-        private bool UsersExists(string id)
+        private bool BusInfoExists(string id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.BusInfo.Any(e => e.Np == id);
         }
     }
 }
