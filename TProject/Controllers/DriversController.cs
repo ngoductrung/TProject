@@ -11,48 +11,48 @@ namespace TProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class DriversController : ControllerBase
     {
         private readonly Test1Context _context;
 
-        public UsersController(Test1Context context)
+        public DriversController(Test1Context context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Drivers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Driver>>> GetDriver()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Driver.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Drivers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUsers(string id)
+        public async Task<ActionResult<Driver>> GetDriver(string id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var driver = await _context.Driver.FindAsync(id);
 
-            if (users == null)
+            if (driver == null)
             {
                 return NotFound();
             }
 
-            return users;
+            return driver;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Drivers/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(string id, Users users)
+        public async Task<IActionResult> PutDriver(string id, Driver driver)
         {
-            if (id != users.Id)
+            if (id != driver.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(users).State = EntityState.Modified;
+            _context.Entry(driver).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace TProject.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsersExists(id))
+                if (!DriverExists(id))
                 {
                     return NotFound();
                 }
@@ -73,20 +73,20 @@ namespace TProject.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Drivers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
+        public async Task<ActionResult<Driver>> PostDriver(Driver driver)
         {
-            _context.Users.Add(users);
+            _context.Driver.Add(driver);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (UsersExists(users.Id))
+                if (DriverExists(driver.Id))
                 {
                     return Conflict();
                 }
@@ -96,28 +96,28 @@ namespace TProject.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUsers", new { id = users.Id }, users);
+            return CreatedAtAction("GetDriver", new { id = driver.Id }, driver);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Drivers/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Users>> DeleteUsers(string id)
+        public async Task<ActionResult<Driver>> DeleteDriver(string id)
         {
-            var users = await _context.Users.FindAsync(id);
-            if (users == null)
+            var driver = await _context.Driver.FindAsync(id);
+            if (driver == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(users);
+            _context.Driver.Remove(driver);
             await _context.SaveChangesAsync();
 
-            return users;
+            return driver;
         }
 
-        private bool UsersExists(string id)
+        private bool DriverExists(string id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Driver.Any(e => e.Id == id);
         }
     }
 }
