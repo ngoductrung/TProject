@@ -16,9 +16,7 @@ namespace TProject.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly Test1Context _context;
-        private IWebHostEnvironment _hostingEnviroment;
-        private IUserService _userService;
+        private Test1Context _context;
 
         public UsersController(Test1Context context)
         {
@@ -88,7 +86,7 @@ namespace TProject.Controllers
 
         // POST: api/Login
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Users>> PostUsers(Users users)
         {
