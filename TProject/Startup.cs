@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using TProject.Models;
 using Microsoft.EntityFrameworkCore;
+using TProject.Models;
+
 
 namespace TProject
 {
