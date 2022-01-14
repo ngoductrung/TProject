@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using TProject.Models;
 using Microsoft.EntityFrameworkCore;
 using TProject.Models;
+using TProject.Entities;
 
 
 namespace TProject
