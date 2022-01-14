@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TProject.Models;
 using TProject.Services;
+using TProject.Entities;
 
-namespace WebApi.Controllers
+namespace TProject.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class LoginController : ControllerBase
     {
         private IUserService _userService;
 
-        public UsersController(IUserService userService)
+        public LoginController(IUserService userService)
         {
             _userService = userService;
         }

@@ -11,11 +11,11 @@ namespace TProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly Test1Context _context;
 
-        public UsersController(Test1Context context)
+        public LoginController(Test1Context context)
         {
             _context = context;
         }
