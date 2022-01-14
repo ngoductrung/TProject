@@ -5,13 +5,12 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace TProject.Models
+namespace TProject.Entities
 {
-    public partial class Oil
+    public partial class Register
     {
         public string Np { get; set; }
-        public DateTime Otime { get; set; }
-        public string Info { get; set; }
+        public DateTime Outdate { get; set; }
 
         public virtual BusInfo NpNavigation { get; set; }
     }

@@ -5,18 +5,15 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace TProject.Models
+namespace TProject.Entities
 {
-    public partial class Atmtechnicians
+    public partial class Stop
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Sex { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string Sid { get; set; }
+        public string Sname { get; set; }
+        public string Kind { get; set; }
         public string Management { get; set; }
-        public string Rfid { get; set; }
-        public bool Quit { get; set; }
+        public string Addr { get; set; }
 
         public virtual Management ManagementNavigation { get; set; }
     }

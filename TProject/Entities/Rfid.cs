@@ -5,19 +5,21 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace TProject.Models
+namespace TProject.Entities
 {
-    public partial class Owner
+    public partial class Rfid
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Sex { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public Rfid()
+        {
+            BusInfo = new HashSet<BusInfo>();
+        }
+
+        public string Rfid1 { get; set; }
+        public string Info { get; set; }
+        public DateTime Active { get; set; }
         public string Management { get; set; }
-        public string Rfid { get; set; }
-        public bool Quit { get; set; }
 
         public virtual Management ManagementNavigation { get; set; }
+        public virtual ICollection<BusInfo> BusInfo { get; set; }
     }
 }
