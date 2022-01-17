@@ -20,7 +20,31 @@ namespace TProject.Controllers
             _context = context;
         }
 
+        // POST: api/Users
+        [HttpPost]
+        public async Task<ActionResult<Users>> PostUsers(Users users)
+        {
+            _context.Users.Add(users);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (UsersExists(users.Id))
+                {
+                    return Conflict("Id đã tồn tại");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetUsers", new { id = users.Id }, users);
+        }
         // GET: api/Users
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
@@ -71,29 +95,6 @@ namespace TProject.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
-        [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
-        {
-            _context.Users.Add(users);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UsersExists(users.Id))
-                {
-                    return Conflict("Id đã tồn tại");
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetUsers", new { id = users.Id }, users);
-        }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]

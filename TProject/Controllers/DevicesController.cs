@@ -2,22 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TProject.Entities;
+using TProject.Services;
 
 namespace TProject.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DevicesController : ControllerBase
     {
         private readonly Test1Context _context;
+        private IWebHostEnvironment _webHostEnvironment;
+        private IUserService _userService;
 
-        public DevicesController(Test1Context context)
+        public DevicesController(Test1Context context, IWebHostEnvironment hostEnvironment, IUserService userService)
         {
             _context = context;
+            _webHostEnvironment = hostEnvironment;
+            _userService = userService;
         }
 
         // GET: api/Devices
@@ -42,8 +49,6 @@ namespace TProject.Controllers
         }
 
         // PUT: api/Devices/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDevice(string id, Device device)
         {
@@ -74,8 +79,6 @@ namespace TProject.Controllers
         }
 
         // POST: api/Devices
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Device>> PostDevice(Device device)
         {
