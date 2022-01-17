@@ -9,6 +9,7 @@ using TProject.Entities;
 
 namespace TProject.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DriversController : ControllerBase
