@@ -22,6 +22,8 @@ namespace TProject.Entities
         public string Management { get; set; }
         public string Imei { get; set; }
         public bool Status { get; set; }
+        public string Latitude { get; set; }
+        public string Longtitude { get; set; }
 
         public virtual Management ManagementNavigation { get; set; }
         public virtual ICollection<BusInfo> BusInfo { get; set; }

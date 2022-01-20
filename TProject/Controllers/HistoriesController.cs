@@ -43,8 +43,6 @@ namespace TProject.Controllers
         }
 
         // PUT: api/Histories/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHistory(string id, History history)
         {
@@ -114,7 +112,24 @@ namespace TProject.Controllers
             return history;
         }
 
-        private bool HistoryExists(string id)
+
+        [HttpGet("Total/{id}")]
+        public async Task<ActionResult<IEnumerable<History>>> GetTotal(String id, DateTime begin, DateTime end)
+        {
+            var history = await _context.History.FindAsync(id);
+            double Total = 0;
+            if (history == null)
+            {
+                return NotFound("Kiểm tra lại số xe");
+            }
+            else if ((begin < history.Time) && (history.Time < end))
+            {
+                Total += history.TripLength;
+            }
+            return Ok(Total);
+        }
+
+            private bool HistoryExists(string id)
         {
             return _context.History.Any(e => e.Np == id);
         }
